@@ -1,0 +1,71 @@
+
+CReating a EC@ instance using ubuntu 22.04 version with t2.micro istance type  – make sure you will allow http traffic 
+AFter Creation access that
+Configure apache with 3 simple steps
+
+
+sudo -i 
+apt update && apt install apache2 -y
+cd /var/www/html/
+rm -f index.html
+echo  "<h1>Hello From DevSecOps Training</h1>"  > index.html
+systemctl start apache2
+
+
+Go onto browser use your public IP and access Page 
+Step2 
+
+Create AMI using Running Imstance
+Wait for to it become available 
+Create new vm using IT 
+Access that and webapge also you need to access 
+
+
+Login AWS Account USing CLi 
+apt  install awscli
+
+
+PACKER 
+
+https://developer.hashicorp.com/packer/tutorials/docker-get-started/get-started-install-cli
+Packer validate
+Packer fmt
+Packer init
+
+
+
+
+packer {
+  required_plugins {
+    amazon = {
+      version = ">= 1.0.0"
+      source  = "github.com/hashicorp/amazon"
+    }
+  }
+}
+
+
+source "amazon-ebs" "ubuntu" {
+  ami_name      = "devsecopspacker"
+  instance_type = "t2.micro"
+  region        = "us-east-1"
+  source_ami    = "ami-04b70fa74e45c3917"
+  ssh_username  = "ubuntu"
+
+
+}
+
+build {
+  sources = [
+    "source.amazon-ebs.ubuntu"
+  ]
+
+  provisioner "shell" {
+    inline = [
+      "sleep 30",
+      "sudo apt update -y  && sudo  apt upgrade -y  &&  sudo apt install nginx -y",
+      "sudo systemctl start nginx",
+    ]
+
+  }
+}
