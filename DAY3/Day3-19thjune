@@ -1,0 +1,68 @@
+Create two VPC
+Create two Route table
+Create two subnet
+Create internet gateway
+Allow in route table ig 
+Creater 2 ec2 instance in both VPC
+Access them 
+Ssh with private IP —  this will not work
+Create peering connecton 
+Accept the connection 
+  Do entry in route table 
+
+
+
+
+Then delete one of vm 
+Create new vm in same vpc but without public IP 
+
+Then access public ip machine and  connect new vm with private IP through SSH
+
+
+
+
+
+
+ git clone https://github.com/mdhack0316/testingcollingtopic
+  cd testing
+  ls
+ cd testingcollingtopic/
+Ls
+
+echo  newfile  > index.html
+git add index
+  238* [2024-06-19 12:21:10]
+  239  [2024-06-19 12:21:18] echo  newfile  > index.html
+  240  [2024-06-19 12:21:18] ls
+  241  [2024-06-19 12:21:23] git add index.html
+  242  [2024-06-19 12:21:31] git commit -m "updated"
+  243  [2024-06-19 12:21:44] git config  --global user.email mayank123modi@gmail.com
+  244  [2024-06-19 12:21:52] git config  --global user.name  "myankamodi"
+  245  [2024-06-19 12:21:54] git commit -m "updated"
+  246  [2024-06-19 12:21:57] git push
+ history
+
+
+https://github.com/mdhack0316/testingcollingtopic
+
+
+
+
+
+TASKS 
+
+
+
+Create your own account in github 
+Create one repo
+Create one file using console
+Clone it in your system 
+ Upload one new file through cli 
+Create code commit repo
+Generate credentials of code commit
+Ucreate onefile from console
+Clone it
+Update one new file using cli metho
+And do push the changes 
+
+
