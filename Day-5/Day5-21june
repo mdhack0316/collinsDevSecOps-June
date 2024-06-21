@@ -1,0 +1,156 @@
+ 83  apt i install awscli -y
+   84  apt i install awscli -yy
+   85  apt  install awscli -y
+   86  aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/s1i2y2g2
+   87  aws configure   – make sure to give region    us-west2
+   88  aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/s1i2y2g2
+   89  docker images
+   90  docker tag devsecopsimage  public.ecr.aws/s1i2y2g2/devsecops
+   91  docker images
+   92  docker image
+   93  docker imags
+   94  docker images
+   95  docker push public.ecr.aws/s1i2y2g2/devsecops
+   96  docker tag devsecopsimage  public.ecr.aws/s1i2y2g2/mayankrepo/mayank
+   97  docker push public.ecr.aws/s1i2y2g2/mayankrepo./mayank
+   98  docker push public.ecr.aws/s1i2y2g2/mayankrepo/mayank
+   99  docker tag devsecopsimage  public.ecr.aws/s1i2y2g2/mayankrepo
+  100  docker push public.ecr.aws/s1i2y2g2/mayankrepo
+  101  dockr pull public.ecr.aws/s1i2y2g2/mayankrepo:latest
+  102  docker  pull public.ecr.aws/s1i2y2g2/mayankrepo:latest
+  103  kubectl
+  104  history
+
+
+
+  105  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+  106  ls
+  107  chmod +x kubectl
+  108  cp kubectl  /usr/bin/
+  109  kubectl
+
+
+
+ 126  rm -f /usr/bin/kubectl
+  127  curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+  128  ls
+  129  rm -f kubectl
+  130  curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+  131  ls
+  132  chmod +x kubectl
+  133  cp kubectl /usr/bin/
+  134  kubectl version
+  135  aws eks  update-kubeconfig   --name mayankeks
+  136  kubectl version
+  137  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+  138  ls
+  139  unzip
+  140  apt install unzip -y
+  141  unzip awscliv2.zip
+  142  sudo ./aws/install
+  143  rm -f .kube/config
+  144  aws eks  update-kubeconfig   --name mayankeks  
+  145  kubectl get ode
+  146  kubectl get node
+  147  vim .kube/config
+  148  kubectl get node
+  149  vim .kube/config
+  150  kubectl get node
+
+
+
+
+ Start your VM
+Confgre aws credentials 
+Install kubectl 
+ Access EKS cluster —  region 
+Run a command  –  kubectl get node
+Create ecr by yourself and upload one  image into that 
+
+
+
+KUBENETES
+
+
+
+ 152  kubectl get nodes
+  153  kubectl get namespace
+  154  kubectl get ns
+  155  kubectl get pods
+  156  kubectl get all
+  157  kubectl cluster-info
+  158  kubectl create ns mayank
+  159  kubectl get ns
+  160  kubectl get pods
+  161  kubectl get pods -n mayank
+  162  kubectl config get-contexts
+  163  kubectl config set-context arn:aws:eks:us-west-2:352435924664:cluster/mayankeks   --namespace mayank
+  164  kubectl config get-contexts
+  165  kubectl get pods
+  166  kubectl run  mayankpod  --image httpd
+  167  kubectl get pods
+  168  kubectl describe pod mayankpod
+  169  kubectl get nodes
+  170  kubectl describe node  | grep -i taint
+  171  kubectl get nodes
+  172  kubectl taint node  ip-19-0-1-224.us-west-2.compute.internal  node.cloudprovider.kubernetes.io/uninitialized=true:NoSchedule-
+  173  kubectl taint node  ip-19-0-1-48.us-west-2.compute.internal   node.cloudprovider.kubernetes.io/uninitialized=true:NoSchedule-
+  174  kubectl describe node  | grep -i taint
+  175  kubectl get npods
+  176  ods
+  177  kubectl get pods
+  178  kubectl get pods -o wide
+  179  kubectl describe pod mayankod
+  180  kubectl describe pod mayankpod
+  181  kubectl get pods
+  182  kubectl delete pod mayankpod
+  183  kubectl get pods
+  184  kubectl create deployment mayank --image nginx
+  185  kubectl get all
+  186  kubectl get all  -o wide
+  187  kubectl delete pod mayank-5646945c45-bzhq9
+  188  kubectl get all  -o wide
+  189  kubectl get pods
+  190  kubectl delete pod mayank-5646945c45-bzhq9
+  191  kubectl get pods
+  192  kubectl delete rs mayank-5646945c45
+  193  kubectl get all
+  194  kubectl expose deployment mayank --port 80 --type LoadBalancer
+  195  kubectl get service
+  196  kubectl describe svc mayank
+  197  kubectl annotate svc mayank service.beta.kubernetes.io/aws-load-balancer-internal="true"
+  198  kubectl get svc
+  199  kubectl delete svc mayank
+  200  kubectl get svc
+  201  kubectl delete svc mayank --force
+  202  kubectl get all
+  203  kubectl expose deployment mayank --port 80 --type LoadBalancer mayank
+  204  kubectl expose deployment mayank --port 80 --type LoadBalancer mayank2
+  205  kubectl expose deployment mayank --port 80 --type LoadBalancer --name  mayank2
+  206  kubectl get svc
+  207  kubectl describe svc mayank2
+  208  kubectl get svc
+  209  kubectl delete svc mayank2
+  210  kubectl expose deployment mayank --port 80 --type LoadBalancer --name  mayank3
+  211  kubectl get svc
+  212  kubectl describe svc mayank3
+  213  kubectl expose deployment mayank --port 80 --type LoadBalancer --name  mayank4
+  214  kubectl get svc
+  215  kubectl describe svc mayank4
+  216  kubectl get all
+  217  kubectl delete svc --all
+  218  kubectl expose deployment mayank --port 80 --type LoadBalancer --name  mayank5
+  219  kubectl get svc
+kubectl delete all --all --force
+
+TASKS: 1
+
+Create ns of your name
+Make it default
+Create one pod using nginx image
+Create one deployment by your name using httpd image
+Use all command that i have shown you
+Expose my deployment
+Get LB url 
+Access it after 7 mins in browser 
+Application will be accessible
