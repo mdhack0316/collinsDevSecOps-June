@@ -1,0 +1,186 @@
+username; mayank
+https://awstse.signin.aws.amazon.com/console
+password: Tse123edu123
+
+
+INstall maven
+Install docker
+Install git command
+Clone github repo
+Pull  tomcat image
+Run tomcat image
+Build the code using maven 
+Cp that int docker container 
+Accessit from browser
+ Use the dockerfile thatis cloned and build the image
+After that create a new container an access it.
+
+
+
+
+ 226  echo 1 > /proc/sys/vm/drop_caches
+  227  free -m
+  228  docker p
+  229  docker ps
+  230  docker exec -it mayankjavapp bash
+  231  ls
+  232  git clone https://github.com/mdhack0316/java-springboot
+  233  cd java-springboot/
+  234  s
+  235  ls
+  236  mvn clean package
+  237  ls
+  238  cd target/ls
+  239  cd target/
+  240  l
+  241  cd maven-archiver/
+  242  ls
+  243  cd ..
+  244  ls
+  245  docker ps
+  246  docker cp  WebApp.war  mayankjavapp:/usr/
+  247  docker exec -it mayankjavapp bash
+  248  ls
+  249  cd ..
+  250  ls
+  251  rm -rf target/
+  252  ls
+  253  vim Dockerfile
+  254  docker build -t  javadocker .
+  255  docker images
+  256  docker run -itd  -p 4444:8080  --name mayank1  javadocker
+  257  docker ps
+  258  history
+
+
+
+Ansible 
+
+
+ 383  sudo apt-add-repository ppa:ansible/ansible
+  384  sudo apt update
+  385  sudo apt install ansible
+  386  ansible
+  387  cd /etc/ansible/
+  388  ls
+  389  vim hosts
+  390  vim ansible.cfg
+  391  ansible-config init --disabled -t all > ansible.cfg
+  392  vim ansible.cfg
+  393  ip a
+  394  ping 8.8.8.8
+  395  ansible  localhost   -m ping
+  396  date
+  397  cal
+  398  date
+  399  ansible  localhost   -m shell    -a  date
+  400  ansible  localhost   -m shell    -a  ls
+  401  ansible  localhost   -m shell    -a  pwd
+  402  ansible  localhost   -m shell -a   "apt install apache2 -y"
+  403  cat /etc/hosts
+  404  docker run -itd  mdhack/ansible:rhel8
+  405  docker images
+  406  dokcer ps
+  407  docker ps
+  408  docker inspect lucid_edison | grep -i ip
+  409  ssh 172.17.0.4
+  410  docker run -itd --restart=always  --privileged  mdhack/ansible:main
+  411  docker rm -f $(docker ps -aq)
+  412  docker rmi -f $(docker images -aq)
+  413  docker run -itd --restart=always  --privileged  mdhack/ansible:main
+  414  docker ps
+  415  docker inspect  naughty_elbakyan  | grep -i ip
+  416  ssh 172.17.0.2
+  417  history
+  418  curl  172.17.0.2
+  419  docker ps
+  420  docker exec -it naughty_elbakyan  bash
+  421  docker ps
+  422  ansible -m ping  172.17.0.2
+  423  ls
+  424  echo > hosts
+  425  vim hosts
+  426  ansible -m ping  172.17.0.2
+  427  ansible -m ping  172.17.0.2 -k
+  428  ansible 172.17.0.2 -m  shell -a ls
+  429  ansible 172.17.0.2 -m  shell -a mkdir mayank
+  430  ansible 172.17.0.2 -m  shell -a "mkdir mayank "
+  431  ansible 172.17.0.2 -m  shell -a ls
+  432  ansible 172.17.0.2 -m  shell -a "rmdir mayank"
+  433  ansible 172.17.0.2 -m  shell -a ls
+  434  ansible 172.17.0.2 -m  shell -a "yum install httpd -y"
+  435  pwd
+  436  ls
+  437  ansible version
+  438  ansible --version
+  439  ansible-doc   -l
+  440  ansible-doc   -l  | wc -l
+  441  ansible-doc   -l  | grep -i yum
+  442  ansible-doc   yum
+  443  l
+  444  vim 1-apache.yaml
+  445  cat 1-apache.yaml
+  446  ansible-playbook 1-apache.yaml --syntax-check
+  447  ansible-playbook 1-apache.yaml -C
+  448  ansible-playbook 1-apache.yaml -C -k
+  449  ansible-playbook  1-apache.yaml  --list-tasks
+  450  vim 1-apache.yaml
+  451  ansible-playbook  1-apache.yaml --syntax-check
+  452  ansible-playbook  1-apache.yaml --list-tasks
+  453  ansible-playbook 1-apache.yaml
+  454  ansible-playbook 1-apache.yaml  -k
+  455  curl 172.17.0.2
+  456  ansible-playbook 1-apache.yaml  -k
+  457  ssh-keygen
+  458  ssh root@172.17.0.2
+  459  ssh-copy-id  root@172.17.0.2
+  460  ssh root@172.17.0.2
+  461  docekr ps
+  462  docker ps
+  463  ansible-playbook  1-apache.yaml
+  464  ansible-playbook  1-apache.yaml  -v
+  465  ansible-playbook  1-apache.yaml  -vv
+  466  ls
+  467  curl 172.17.0.2
+  468  vim 1-apache.yaml
+  469  curl 172.17.0.2
+  470  ansible-playbook  1-apache.yaml  -vv
+  471  curl 172.17.0.2
+
+
+
+Install Ansible
+Run simple commands
+RUn some adhoc commands
+Create a docker container as your managed node using command no.   413
+Update your inventory file
+Try to ping managed node
+With password
+Without password also 
+Use some adhoc commands again in managed node
+ Then create a playbook that willconfigure apache using ansible 
+
+
+
+
+root@trainer:/etc/ansible# cat 1-apache.yaml
+---
+- name: Going to Configure Apache Server
+  hosts: 172.17.0.2
+  tasks:
+  - name: Installing the Package
+    yum:
+     name: httpd
+     state: present
+
+  - name: Creating Content
+    copy:
+     content: "Hello From Mayank"
+     dest: /var/www/html/index.html
+
+  - name: Starting the server
+    service:
+     name: httpd
+     state: started
+
+
