@@ -1,0 +1,38 @@
+Create 2 users with  ec2 readonly access
+ Login with them 
+Verify working or not 
+Then give them ec2 ful access policy 
+Then create one ec2 instance
+Delete it
+Add both users in a group 
+Give group admin  permission 
+Login again and verify whether you can access everything now or not.
+
+
+WAF
+
+
+
+Create one VPC
+Create 2 subnet in 2 diff az 
+Create  internet gateway attaachpc
+Create route table attach ig and vpc
+Create one instance using same same vpc with enabling public IP
+Acces it Configure apache
+Access the app using IP
+Create target group
+Create Lb
+Wait for LB to come into running stage
+Go to web acl / WAF
+  Create IPSET  — Youneed to provide you machine Public ip that can you from https://whatismyipaddress.com/
+Add that into ipset     ip/32
+  Create webacl with all correctt details and verify whether it is working or not 
+
+S3 
+
+ Create s3 bucket private without versioning
+ Upload one file with some content 
+Enable public access
+Access it
+Upload same name file with diff content you will notice previous file get removed
+Enable versioning now follow same thing
