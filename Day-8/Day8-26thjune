@@ -1,0 +1,113 @@
+ 263  git clone https://mdhack0316@bitbucket.org/mdhacknew/devsecops.git
+  264  cd devsecops/
+  265  ls
+  266  cat Dockerfile
+  267  docker images
+  268  apt install docker.io -y
+  269  wget https://github.com/aquasecurity/trivy/releases/download/v0.18.3/trivy_0.18.3_Linux-64bit.deb
+  270  sudo dpkg -i trivy_0.18.3_Linux-64bit.deb
+  271  ls
+  272  dpkg -i trivy_0.18.3_Linux-64bit.deb
+  273  trivy
+  274  docker images
+  275  docker pull oraclelinux:8.3
+  276  trivy image oraclelinux:8.3
+  277  docker pull httpd
+  278  trivy image httpd  | head -20
+  279  docker images
+  280  docker login -umayank123modi@gmail.com mayanktse.jfrog.io
+  281  docker images
+  282  docker  tag httpd:latest mayanktse.jfrog.io/mayank-docker/mayank1:latest
+  283  docker push mayanktse.jfrog.io/mayank-docker/mayank1:latest
+  284  history
+
+
+
+
+TASKS : 
+Create ecr Cluster
+Create task definition 
+Create service with 2 replicas 
+Verify working or not 
+Use trivy to scan the image
+Create one repo and clone in bitbucket 
+Create free trail account on jfrog and upload image and scan it 
+
+https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
+
+
+
+
+  263  terraform
+  264  sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
+  265  wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null
+  266  gpg --no-default-keyring --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg --fingerprint
+  267  echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
+https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+  268  sudo apt update
+  269  sudo apt-get install terraform
+  270  terraform
+  271  ls
+  272  mkdir terraform
+  273  cd terraform/
+  274  aws configure
+  275  apt install awscli -y
+  276  aws configure
+  277  history
+
+  263  cd terraform/
+  264  ls
+  265  vim main.tf
+  266  cat main.tf
+  267  ls -la
+  268  terraform inint
+  269  terraform init
+  270  vim main.tf
+  271  terraform init
+  272  ls -la
+  273  ls  .terraform/providers/registry.terraform.io/hashicorp/aws/
+  274  ls  .terraform/providers/registry.terraform.io/hashicorp/aws/5.55.0/
+  275  ls  .terraform/providers/registry.terraform.io/hashicorp/aws/5.55.0/linux_amd64/
+  276  ls
+  277  vim main.tf
+  278  terraform validate
+  279  vim main.tf
+  280  terraform validate
+  281  vim main.tf
+  282  terraform validate
+  283  vim main.tf
+  284  terraform validate
+  285  cat main.tf
+  286  terraform fmt
+  287  cat main.tf
+  288  terraform apply
+  289  terraform destroy
+  290  vim main.tf
+  291  terraform apply  --auto-approve
+  292  terraform destroy  --auto-approve
+  293  terraform
+  294  terraform plan
+  295  terraform
+  296  ls
+  297  cat terraform.tfstate
+
+root@trainer2:~/terraform# cat main.tf
+provider "aws" {
+  region = "us-west-2"
+}
+
+
+resource "aws_instance" "myec2" {
+
+  ami           = "ami-03c983f9003cb9cd1"
+  count        =  3
+  key_name      = "mayanktesting"
+  instance_type = "t3a.large"
+  tags = {
+
+    Name = "terraform"
+  }
+
+}
+
+
