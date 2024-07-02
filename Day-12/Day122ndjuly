@@ -1,0 +1,15 @@
+ helm repo list
+
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm install monitoring -n mayank prometheus-community/kube-prometheus-stack
+
+
+
+1.create free trial account on atlassian 
+2. Create  one ec2 with 8gb min ram - 20gb  - ubuntu 22.04 
+3.  Install bamboo software  version should be 9.0.0
+4. Extract it
+5. Follow the instruction form the website 
+
+
+INstall Docker desktop completely install one extension allied checkmrx then show me the screen 
