@@ -1,0 +1,220 @@
+
+
+
+ Create your ec2 instance  t2.large 25gb storage
+Install  jenkins docker.io  wget git   
+Configure jenkins completely
+Install plugins +   pipeline stage view
+ Connect tools jdk17 and node16
+ Install sonarqube using docker container
+Get the api key 
+Add into jenkins
+
+
+
+
+
+Create one t2large instance
+
+Apt update and clone the code https://github.com/mdhack0316/DevSecOps-Project
+Install docker
+Install sonarqube as a container
+docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
+Install trivy
+Login in sonarqube
+Admin
+Admin
+Install jenkins
+Install plugins
+Nodejs
+Eclispe temurin installer
+Sonarqube scanner
+Set in tools
+Manage jenkins  > tools  > JDK installation > name jdk17  > install automatically  jdk-17.0.8.1+1
+Manage jenkins > tools > nodejs install > name node16 > nstall automatically > noejs16.2.0
+Go to sconar qube > administration  > security > users > crreate token  > name  jenkins > generate copy it
+Go to jenkins > manage jenkins > credentials  > secret text  > ID  > Sonar-token
+Manage jenkins > system > snarqube >  sonarqube server > name sonar-server  > URL ofsonar sevrer > sonar-token for athentication
+Tools > sonarqube scanner instalation > name  sonar-scanner >  install automatically > sonarqcube scanner 5.0.1.3006  apply save
+Create pipeline n a new job
+Test pipeline
+
+
+
+pipeline {
+    agent any
+    tools {
+        jdk 'jdk17'
+        nodejs 'node16'
+    }
+    environment {
+        SCANNER_HOME = tool 'sonar-scanner'
+    }
+    stages {
+        stage('clean workspace') {
+            steps {
+                cleanWs()
+            }
+        }
+        stage('Checkout from Git') {
+            steps {
+                git branch: 'main', url: 'https://github.com/mdhack0316/DevSecOps-Project.git'
+            }
+        }
+        stage("Sonarqube Analysis") {
+            steps {
+                withSonarQubeEnv('sonar-server') {
+                    sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Netflix \
+                    -Dsonar.projectKey=Netflix'''
+                }
+            }
+        }
+        stage("quality gate") {
+            steps {
+                script {
+                    waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token'
+                }
+            }
+        }
+        stage('Install Dependencies') {
+            steps {
+                sh "npm install"
+            }
+        }
+    }
+}
+
+
+
+
+
+Installl plugins  
+Plugins > docker build and push , docker, dockercommons , docker pipeline , docker api dockerbuild step
+Create ddocker credential in jenkins
+Manage jenkins  > tools >  docker installation > docker > latest version > apply and save
+Enable email notificaiton > gmail account  > manage google account  > security > 2fa enable  > search app password > app name devsecopos > create copy password
+Dashbard > mange jenkins > system > email notifcaiton > smtp server  > smtp.gmail.com > mayank123modi@gmail.com   > advanced  > use smtp and use ssl > same useremail  > paste pasword tha you got > port  465 > test config  > sameple email > verify email
+Manage jenkins > system > extended email notificaiton > smtp server  smtp.gmail.com > smtp port 465 > credentail > use ssll  > default content type > html > trigger always , failue any > apply save
+Add in  pipeline post stag esection foremail .
+
+
+
+
+
+
+pipeline {
+    agent any
+    tools {
+        jdk 'jdk17'
+        nodejs 'node16'
+    }
+    environment {
+        SCANNER_HOME = tool 'sonar-scanner'
+    }
+    stages {
+        stage('clean workspace') {
+            steps {
+                cleanWs()
+            }
+        }
+        stage('Checkout from Git') {
+            steps {
+                git branch: 'main', url: 'https://github.com/mdhack0316/DevSecOps-Project.git'
+            }
+        }
+        stage("Sonarqube Analysis") {
+            steps {
+                withSonarQubeEnv('sonar-server') {
+                    sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Netflix \
+                    -Dsonar.projectKey=Netflix'''
+                }
+            }
+        }
+        stage("quality gate") {
+            steps {
+                script {
+                    waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token'
+                }
+            }
+        }
+        stage('Install Dependencies') {
+            steps {
+                sh "npm install"
+            }
+        }
+        stage('TRIVY FS SCAN') {
+            steps {
+                sh "trivy fs . > trivyfs.txt"
+            }
+        }
+        stage("Docker Build & Push"){
+            steps{
+                script{
+                   withDockerRegistry(credentialsId: 'docker_creds', toolName: 'docker'){   
+                       sh "docker build --build-arg TMDB_V3_API_KEY=54800c1cb0fe4277ed6f634014a64fd6 -t mdhack/netflix ."
+                       sh "docker push mdhack/netflix:latest "
+                    }
+                }
+            }
+        }
+        stage("TRIVY"){
+            steps{
+                sh "trivy image nasi101/netflix:latest > trivyimage.txt" 
+            }
+        }
+        stage('Deploy to container'){
+            steps{
+                sh 'docker run -d --name netflix -p 8081:80 mdhack/netflix:latest'
+            }
+        }
+        stage('Asking For Production Release?') {
+            steps {
+                input 'Release To Production? '
+            }
+        }
+        
+    }
+
+     post {
+     always {
+        emailext attachLog: true,
+            subject: "'${currentBuild.result}'",
+            body: "Project: ${env.JOB_NAME}<br/>" +
+                "Build Number: ${env.BUILD_NUMBER}<br/>" +
+                "URL: ${env.BUILD_URL}<br/>",
+            to: 'mayanktrainindocs@gmail.com',                                
+            attachmentsPattern: 'trivyfs.txt,trivyimage.txt'
+        }
+    }
+}
+
+
+
+http://3.133.100.140:8080/  
+
+Mayank
+Mayank 
+
+
+
+  18  sudo apt-get update
+   19  sudo apt-get install trivy
+   20  usermod -aG jenlkins docker
+   21  usermod -aG jenkins docker
+   22  usermod -aG docker jenkins
+   23  chmod 777 -R /var/run/docker.sock
+   24  docker ps
+   25  docker rm -f netflix
+   26  kubectl
+   27  l
+   28  chmod +x kubectl
+   29  cp kubectl  /usr/bin/
+   30  kubectl
+   31  kubectl  get nodes
+   32  cd /var/lib/jenkins/
+   33  mkdir .kube
+   34  cd
+   35  docker rm -f netflix
+   36  history
+
+
